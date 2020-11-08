@@ -1,32 +1,27 @@
 import {
-    makeStyles,
     Typography,
     List,
     Divider,
     ListItem,
     ListItemIcon,
     ListItemText,
+    Button,
 } from '@material-ui/core';
-
-const useStyles = makeStyles((theme) => ({
-    drawerComponentHeader: {
-        margin: theme.spacing(2),
-    },
-}));
+import { Link } from 'react-router-dom';
 
 const DrawerComponent = (props) => {
     const { menuItems, closeDrawer } = props;
-    const styles = useStyles();
 
     return (
         <>
-            <Typography
-                variant="h5"
+            <Button
                 color="primary"
-                className={styles.drawerComponentHeader}
+                component={Link}
+                to="/"
+                onClick={closeDrawer}
             >
-                Ecom Shop
-            </Typography>
+                <Typography variant="h4">Ecom Shop</Typography>
+            </Button>
 
             <Divider />
             <List>
@@ -44,11 +39,11 @@ const DrawerComponent = (props) => {
 
 const ListItemRenderer = (props) => {
     const { menuItem, closeDrawer } = props;
-    const { name, image: SelectedIcon } = menuItem;
+    const { name, image: SelectedIcon, path } = menuItem;
 
     return (
         <div onClick={closeDrawer}>
-            <ListItem button>
+            <ListItem button component={Link} to={path}>
                 <ListItemIcon>
                     <SelectedIcon color="primary" />
                 </ListItemIcon>
