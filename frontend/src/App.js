@@ -1,11 +1,18 @@
 import './App.css';
+import Header from './components/common/Header';
+import { Container } from '@material-ui/core';
+import Routing from './Routing/Routing';
 
-App = () => {
-  return (
-  <>
-  <h1> Welcome </h1>
-  </>
-  );
-}
+const App = () => {
+    return (
+        <>
+            <Header></Header>
+
+            <Container>
+                <Routing />
+            </Container>
+        </>
+    );
+};
 
 export default App;
