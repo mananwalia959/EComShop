@@ -22,7 +22,8 @@ const useStyles = makeStyles({
 });
 
 const ProductTile = (props) => {
-    const { _id, name, image, rating, price, numReviews } = props.product;
+    const { product } = props;
+    const { _id, name, image, price } = product;
     const styles = useStyles();
 
     return (
@@ -46,10 +47,7 @@ const ProductTile = (props) => {
                                 >
                                     {name}
                                 </Typography>
-                                <Rating
-                                    rating={rating}
-                                    numReviews={numReviews}
-                                />
+                                <Rating product={product} />
 
                                 <Typography
                                     color="textPrimary"

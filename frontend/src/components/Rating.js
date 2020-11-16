@@ -21,13 +21,13 @@ const breakintoStars = (rating) => {
 };
 
 const Rating = (props) => {
-    const { rating, numReviews } = props;
+    const { _id, rating, numReviews } = props.product;
     const starRatings = breakintoStars(rating);
 
     return (
         <div>
-            {starRatings.map((starRating) => (
-                <StartRating starRating={starRating} />
+            {starRatings.map((starRating, index) => (
+                <StartRating key={_id + '_' + index} starRating={starRating} />
             ))}
             <Typography color="textPrimary" variant="caption" component="p">
                 from {numReviews} reviews
