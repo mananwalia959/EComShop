@@ -8,6 +8,7 @@ import {
     Typography,
 } from '@material-ui/core';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Rating from './Rating';
 
 const useStyles = makeStyles({
@@ -21,13 +22,13 @@ const useStyles = makeStyles({
 });
 
 const ProductTile = (props) => {
-    const { name, image, rating, price, numReviews } = props.product;
+    const { _id, name, image, rating, price, numReviews } = props.product;
     const styles = useStyles();
 
     return (
         <Box display="flex" justifyContent="center">
             <Box className={styles.root}>
-                <div>
+                <Link to={'/products/' + _id}>
                     <Card elevation={3}>
                         <CardActionArea>
                             <CardMedia
@@ -60,7 +61,7 @@ const ProductTile = (props) => {
                             </CardContent>
                         </CardActionArea>
                     </Card>
-                </div>
+                </Link>
             </Box>
         </Box>
     );

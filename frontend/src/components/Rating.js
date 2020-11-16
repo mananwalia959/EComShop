@@ -16,7 +16,6 @@ const breakintoStars = (rating) => {
             ratingArray.push(0);
         }
     }
-    console.log(ratingArray);
 
     return ratingArray;
 };
