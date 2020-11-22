@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 const getMenuItems = () => {
     const menuItems = [];
     const myCartMI = getMenuItem('My Cart', ShoppingCartIcon, '/mycart');
-    const loginMenuMI = getMenuItem('Login', AccountCircleIcon, 'login');
+    const loginMenuMI = getMenuItem('Login', AccountCircleIcon, '/login');
     menuItems.push(myCartMI);
     menuItems.push(loginMenuMI);
 
