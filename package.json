@@ -1,0 +1,25 @@
+{
+  "name": "ecomshop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "cd frontend && npm install && cd .. && cd backend && npm install",
+    "dev-client": "cd frontend && npm start",
+    "dev-server": "cd backend && npm start",
+    "dev": "concurrently \"npm run dev-server\" \"npm run dev-client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mananwalia959/EComShop.git"
+  },
+  "author": "Manan Walia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mananwalia959/EComShop/issues"
+  },
+  "homepage": "https://github.com/mananwalia959/EComShop#readme",
+  "devDependencies": {
+    "concurrently": "^5.3.0"
+  }
+}
