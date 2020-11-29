@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid } from '@material-ui/core';
-import products from './../products';
+import { getAllProducts } from './../services/productService';
+
 import ProductTile from './ProductTile';
 
 const HomePage = () => {
+    const [products, setProducts] = useState([]);
+
+    useEffect((effect) => {
+        const execute = async () => {
+            const { data } = await getAllProducts();
+            setProducts(data);
+        };
+
+        execute();
+    }, []);
+
     return (
         <>
             <div>

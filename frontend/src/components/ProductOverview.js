@@ -1,8 +1,8 @@
 import { Box, Button, Grid, makeStyles, Typography } from '@material-ui/core';
 import { ArrowBackSharp } from '@material-ui/icons';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import products from './../products';
+import { getProductById } from '../services/productService';
 import Rating from './Rating';
 
 const useStyles = makeStyles((theme) => ({
@@ -30,11 +30,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProductOverview = (props) => {
-    const { match } = props;
-    const id = match.params.productid;
-    const product = products.find((prod) => prod._id === id);
+    const [product, setProduct] = useState({});
     const styles = useStyles();
-    const { image, name, description, price, countInStock } = product;
+    const productId = props.match.params.productid;
+    useEffect(
+        () => {
+            const execute = async () => {
+                const { data } = await getProductById(productId);
+                setProduct(data);
+            };
+            execute();
+        },
+        [productId] // damn pesky warning about missing dependency , remove productId if you don't care about the warning
+    );
+
     return (
         <>
             <Link to={'/'}>
@@ -60,27 +69,35 @@ const ProductOverview = (props) => {
                     md={5}
                     className={styles.imageContainer}
                 >
-                    <img className={styles.image} src={image} alt={name}></img>
+                    <img
+                        className={styles.image}
+                        src={product.image}
+                        alt={product.name}
+                    ></img>
                 </Grid>
 
                 <Grid item xs={12} md={3}>
-                    <Typography variant="h4">{name}</Typography>
+                    <Typography variant="h4">{product.name}</Typography>
                     <Rating product={product} />
-                    <Typography>{description}</Typography>
+                    <Typography>{product.description}</Typography>
                 </Grid>
                 <Grid item container justify="space-between" xs={12} md={3}>
                     <Grid xs={6} item>
                         <Typography color="textSecondary">Price</Typography>
                     </Grid>
                     <Grid xs={6} item>
-                        <Typography color="textPrimary">${price}</Typography>
+                        <Typography color="textPrimary">
+                            ${product.price}
+                        </Typography>
                     </Grid>
                     <Grid xs={6} item>
                         <Typography color="textSecondary">Stock</Typography>
                     </Grid>
                     <Grid xs={6} item>
                         <Typography color="textPrimary">
-                            {countInStock > 0 ? 'In Stock' : 'Out Of Stock'}
+                            {product.countInStock > 0
+                                ? 'In Stock'
+                                : 'Out Of Stock'}
                         </Typography>
                     </Grid>
                     <Grid
@@ -95,7 +112,7 @@ const ProductOverview = (props) => {
                             variant="contained"
                             size="large"
                             color="primary"
-                            disabled={countInStock === 0}
+                            disabled={product.countInStock === 0}
                         >
                             Add to Cart
                         </Button>

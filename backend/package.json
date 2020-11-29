@@ -8,7 +8,7 @@
     "start": "nodemon index.js",
     "start-prod": "node index.js"
   },
-  "author": "",
+  "author": "Manan Walia",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"
